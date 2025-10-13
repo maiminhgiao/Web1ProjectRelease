@@ -350,13 +350,13 @@
 
     <script id="details-template" type="text/x-handlebars-template">
       <section class="container-fluid" id="banner-small">
-        {{#each data}}
-        <section class="container py-5">
-          <h1>{{name}}</h1>
-          <div>{{description}}</div>
-        </section>
       </section>
-        {{/each}}
+      {{#each data}}
+        <section class="container py-5">
+          <h1 class="pb-3">{{name}}</h1>
+          <div>{{{description}}}</div>
+        </section>
+      {{/each}}
     </script>
 
     <script>

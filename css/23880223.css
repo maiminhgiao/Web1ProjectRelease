@@ -93,7 +93,7 @@ h1 {
 }
 
 #banner-small {
-  background-image: url(../images/bg-banner.gif);
+  background-image: url(/images/bg-banner.gif);
   padding: 5px;
 }
 
