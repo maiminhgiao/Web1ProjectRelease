@@ -1,0 +1,136 @@
+:root{
+    --pink:#FA97C2;
+    --blue:#2FA0D5;
+    --green:#73C926
+}
+
+body {
+    font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Changa One', cursive;
+    font-weight: 400;
+}
+
+h1 {
+    font-size: 60px;
+    line-height: 60px;
+    font-weight: 900;
+}
+
+/*Header*/
+#menuHeader a{
+    display: block;
+    padding: 0 20px;
+    font-weight: bold;
+    color: black;
+    font-family: 'Changa One', cursive;
+}
+
+#menuHeader a.active {
+    color: var(--blue);
+}
+
+#formSearch input{
+    width:120px
+}
+
+#formSearch i{
+    color: var(--green);
+}
+
+/*banner*/
+#banner{
+    background-image: url(../images/bg-banner.gif);
+}
+
+#banner>div{
+    background: url(../images/logo_bg.png) left top no-repeat, url(../images/search_bg.png) right top no-repeat;
+    padding: 50px 30px;
+}
+
+#banner a{
+    background-color: var(--pink);
+    font-family: 'Changa One', cursive;
+    color: white;
+    font-size: 30px;
+}
+
+.carousel-item{
+    min-height: 15rem;
+}
+
+#banner .carousel-indicators li{
+    width: 1.2rem ;
+    height: 1.2rem;
+    border-radius: 1.2rem;
+    border: none;
+    margin: 0 0.3rem;
+    position: relative;
+}
+
+#banner .carousel-indicators li span{
+    position: absolute;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 0.6rem;
+    border: none;
+    top:0.3rem;
+    left: 0.3rem;
+    text-align: left;
+    text-indent: -99999;
+}
+
+#banner .carousel-indicators li.active span{
+    background-color: var(--green)
+}
+
+.readmore{
+    color: var(--blue);
+    margin-top: -3px;
+}
+
+/* about us */
+#aboutus{
+    background-color: var(--pink);
+}
+
+#formSignup {
+    border-style: dashed !important;
+    border-color: rgba(0,0,0,0.5) !important;
+}
+
+/*news*/
+#news .date{
+    background-color: var(--green);
+}
+
+/*footer*/
+footer{
+    background-image: url(../images/bg-footer.gif);
+}
+
+#menu-footer a{
+    color: white;
+    font-weight: bold;
+    font-family: 'Changa One', cursive;
+    display: block;
+    padding: 0 2rem;
+}
+
+#menu-footer a.active{
+    color: var(--pink);
+}
+
+/*Modal Login*/
+#formLogin button[type="submit"]{
+    background-color: var(--blue);
+    color: white;
+
+}
