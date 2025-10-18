@@ -146,3 +146,13 @@ footer {
   background-color: var(--blue);
   color: white;
 }
+
+/* Testimonials */
+#testimonials{
+  background-color: var(--pink);
+}
+
+#testimonials.col{
+  background: url(../images/quot.png) left top no-repeat;
+  padding-left: 3rem;
+}
