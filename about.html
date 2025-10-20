@@ -100,38 +100,12 @@
         </div>
       </nav>
     </header>
+    <section id="banner-small"></section>
     <div id="content">
-      <section id="banner-small"></section>
       <section class="container py-5">
         <div class="row">
           <div class="col-md-8 col-sm-12" id="about-us"></div>
-          <div class="col-md-4 col-sm-12">
-            <h1 class="py-3">Our Vision</h1>
-            <div>
-              <img
-                src="./images/vision/vision-1.jpg"
-                alt="vision1"
-                class="float-start me-3 rounded-4"
-              />
-              <h3>Accumsan et</h3>
-              <p class="text-black-50">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut est
-                exercitationem laboriosam nam. Vel nesciunt eos.
-              </p>
-            </div>
-            <div class="clearfix mb-3">
-              <img
-                src="./images/vision/vision-2.jpg"
-                alt="vision2"
-                class="float-start me-3 rounded-4"
-              />
-              <h3>Accumsan et</h3>
-              <p class="text-black-50">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut est
-                exercitationem laboriosam nam. Vel nesciunt eos.
-              </p>
-            </div>
-          </div>
+          <div class="col-md-4 col-sm-12" id="visions"></div>
         </div>
       </section>
 
@@ -172,59 +146,7 @@
       </section>
 
       <!-- our team -->
-      <section id="our-team" class="container py-5">
-        <h1>Our Team</h1>
-        <div class="row py-3">
-          <div class="col">
-            <img
-              src="./images/our-team/team-1.jpg"
-              alt="team-1"
-              class="rounded-4 mb-3 img-fluid"
-            />
-            <h4>Emily Cramer</h4>
-            <p class="text-black-50">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
-              quia.
-            </p>
-          </div>
-          <div class="col">
-            <img
-              src="./images/our-team/team-1.jpg"
-              alt="team-1"
-              class="rounded-4 mb-3 img-fluid"
-            />
-            <h4>Emily Cramer</h4>
-            <p class="text-black-50">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
-              quia.
-            </p>
-          </div>
-          <div class="col">
-            <img
-              src="./images/our-team/team-1.jpg"
-              alt="team-1"
-              class="rounded-4 mb-3 img-fluid"
-            />
-            <h4>Emily Cramer</h4>
-            <p class="text-black-50">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
-              quia.
-            </p>
-          </div>
-          <div class="col">
-            <img
-              src="./images/our-team/team-1.jpg"
-              alt="team-1"
-              class="rounded-4 mb-3 img-fluid"
-            />
-            <h4>Emily Cramer</h4>
-            <p class="text-black-50">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
-              quia.
-            </p>
-          </div>
-        </div>
-      </section>
+      <section id="our-team" class="container py-5"></section>
     </div>
     <footer class="container-fluid text-center text-white py-3">
       <ul class="nav justify-content-center py-3" id="menu-footer">
@@ -343,8 +265,8 @@
     <script src="./js/23880223.js"></script>
 
     <script id="about-us-template" type="text/x-handlebars-template">
-      <h1 class="py-3">About Us</h1>
       {{#each data}}
+        <h1 class="py-3">{{name}}</h1>
         <div>
           <img
             src="{{thumbpath}}"
@@ -364,17 +286,67 @@
       {{/each}}
     </script>
 
-    <script id="details-template" type="text/x-handlebars-template">
+    <script id="visions-template" type="text/x-handlebars-template">
+      <h1 class="py-3">Our Vision</h1>
       {{#each data}}
-        <h1 class="py-3">{{name}}</h1>
-        <img src="{{thumbpath}}" alt="{{name}}" class="float-start rounded-4" />
-        <p>{{{description}}}</p>
+        <div class="clearfix mb-3">
+          <a
+            class="text-decoration-none"
+            href="#"
+            onclick="loadData('visions/{{id}}', '#details-template', 'content')"
+          >
+            <img
+              src="{{thumbpath}}"
+              alt="{{name}}"
+              class="float-start me-3 rounded-4"
+            />
+            <h3 class="text-black">{{name}}</h3>
+            <p class="text-black-50">
+              {{summary}}
+            </p>
+          </a>
+        </div>
       {{/each}}
+    </script>
+
+    <script id="details-template" type="text/x-handlebars-template">
+      <div class="container py-5 overflow-auto">
+        {{#each data}}
+          <h1 class="py-3">{{name}}</h1>
+          <img
+            src="{{imagepath}}"
+            alt="{{name}}"
+            class="float-start rounded-4 me-3"
+          />
+          <p>{{{description}}}</p>
+        {{/each}}
+      </div>
+    </script>
+
+    <script id="our-team-template" type="text/x-handlebars-template">
+      <h1>Our Team</h1>
+      <div class="row py-3">
+        {{#each data}}
+        <div class="col">
+          <a href="#" class="text-decoration-none" onclick="loadData('team/{{id}}', '#details-template', 'content')">
+          <img
+            src="{{thumbpath}}"
+            alt="{{name}}"
+            class="rounded-4 mb-3 img-fluid"
+          />
+          <h4 class="text-black">{{name}}</h4>
+          <p class="text-black-50">
+            {{summary}}
+          </p></a>
+        </div>
+        {{/each}}
     </script>
 
     <script>
       window.onload = function () {
         loadData("aboutus", "#about-us-template", "about-us");
+        loadData("visions", "#visions-template", "visions");
+        loadData("team", "#our-team-template", "our-team");
       };
     </script>
   </body>
