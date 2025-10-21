@@ -110,40 +110,7 @@
       </section>
 
       <!-- testimonials -->
-      <section class="container-fluid py-5" id="testimonials">
-        <div class="container">
-          <h1 class="text-white">Testtimonials</h1>
-          <div class="row py-3">
-            <div class="col">
-              <p class="text-black-50">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Assumenda quasi doloribus sequi culpa ab laborum sit aperiam in
-                ratione. Blanditiis inventore hic tempore minus suscipit
-              </p>
-              <span class="text-white">Patrick Pool</span> <br />
-              <a href="#">info@demolink.org</a>
-            </div>
-            <div class="col">
-              <p class="text-black-50">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Assumenda quasi doloribus sequi culpa ab laborum sit aperiam in
-                ratione. Blanditiis inventore hic tempore minus suscipit
-              </p>
-              <span class="text-white">Patrick Pool</span> <br />
-              <a href="#">info@demolink.org</a>
-            </div>
-            <div class="col">
-              <p class="text-black-50">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Assumenda quasi doloribus sequi culpa ab laborum sit aperiam in
-                ratione. Blanditiis inventore hic tempore minus suscipit
-              </p>
-              <span class="text-white">Patrick Pool</span> <br />
-              <a href="#">info@demolink.org</a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section class="container-fluid py-5" id="testimonials"></section>
 
       <!-- our team -->
       <section id="our-team" class="container py-5"></section>
@@ -273,13 +240,15 @@
             alt="{{name}}"
             class="float-start rounded-4 me-3"
           />
-          <h3>{{name}}</h3>
-          <p class="text-black-50">
-            {{{summary}}}
-          </p>
+          <div class="text-long">
+            <!-- <h3>{{name}}</h3> -->
+            <div class="text-black-50">
+              {{{summary}}}
+            </div>
+          </div>
           <a
             href="#"
-            class="btn btn-link readmore ps-0 ms-0"
+            class="btn btn-link readmore ps-0 ms-0 morepadding"
             onclick="loadData('aboutus/{{id}}', '#details-template','content')"
           >Read more</a>
         </div>
@@ -291,7 +260,7 @@
       {{#each data}}
         <div class="clearfix mb-3">
           <a
-            class="text-decoration-none"
+            class="text-decoration-none text-black-50"
             href="#"
             onclick="loadData('visions/{{id}}', '#details-template', 'content')"
           >
@@ -301,10 +270,13 @@
               class="float-start me-3 rounded-4"
             />
             <h3 class="text-black">{{name}}</h3>
-            <p class="text-black-50">
+            <div class="text-long1 text-black-50">
+            <p >
               {{summary}}
             </p>
           </a>
+          </div>
+          </div>
         </div>
       {{/each}}
     </script>
@@ -318,7 +290,7 @@
             alt="{{name}}"
             class="float-start rounded-4 me-3"
           />
-          <p>{{{description}}}</p>
+          <div class="text-black-50"><p>{{{description}}}</p></div>
         {{/each}}
       </div>
     </script>
@@ -328,18 +300,36 @@
       <div class="row py-3">
         {{#each data}}
         <div class="col">
-          <a href="#" class="text-decoration-none" onclick="loadData('team/{{id}}', '#details-template', 'content')">
+          <a href="#" class="text-decoration-none " onclick="loadData('team/{{id}}', '#details-template', 'content')">
           <img
             src="{{thumbpath}}"
             alt="{{name}}"
             class="rounded-4 mb-3 img-fluid"
           />
-          <h4 class="text-black">{{name}}</h4>
-          <p class="text-black-50">
+          <h4 class="text-black ">{{name}}</h4>
+          <p class="text-black-50 summary">
             {{summary}}
           </p></a>
         </div>
         {{/each}}
+    </script>
+
+    <script id="testimonials-template" type="text/x-handlebars-template">
+      <div class="container">
+        <h1 class="text-white">Testimonials</h1>
+        <div class="row py-3">
+          {{#each data}}
+            <div class="col text-wrapper">
+              <p class="text-black-50 summary">
+                {{summary}}
+              </p>
+              <span class="text-white">{{name}}</span>
+              <br />
+              <a href="#">{{email}}</a>
+            </div>
+          {{/each}}
+        </div>
+      </div>
     </script>
 
     <script>
@@ -347,6 +337,7 @@
         loadData("aboutus", "#about-us-template", "about-us");
         loadData("visions", "#visions-template", "visions");
         loadData("team", "#our-team-template", "our-team");
+        loadData("testimonials", "#testimonials-template", "testimonials");
       };
     </script>
   </body>

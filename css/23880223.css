@@ -106,7 +106,6 @@ h1 {
   color: var(--blue);
 }
 
-
 /* about us */
 #aboutus {
   background-color: var(--pink);
@@ -148,11 +147,48 @@ footer {
 }
 
 /* Testimonials */
-#testimonials{
+#testimonials {
   background-color: var(--pink);
 }
 
-#testimonials.col{
+#testimonials.col {
   background: url(../images/quot.png) left top no-repeat;
   padding-left: 3rem;
 }
+
+.text-wrapper {
+  max-width: 500px;
+  word-break: break-word;
+  text-align: left;
+}
+
+.morepadding {
+  padding-top: 15px;
+}
+
+.summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4em;
+  max-height: calc(1.4em * 6);
+  white-space: normal;
+}
+
+/* .text-long {
+  display: -webkit-box;
+  -webkit-line-clamp: 9;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} */
+
+/* .text-long1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} */
