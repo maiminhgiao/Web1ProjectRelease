@@ -23,6 +23,7 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
   <!-- Web1 css file -->
   <link rel="stylesheet" href="./css/23880223.css" />
+  <script src="https://www.google.com/recaptcha/api.js?render=reCAPTCHA_site_key"></script>
 </head>
 
 <body>
@@ -104,7 +105,7 @@
         beatae minima error incidunt ea quo amet impedit temporibus natus ipsum reiciendis! Error, quibusdam fugit.</p>
       <p>Send an email. All fields with an * are required.
       </p>
-      <form action="" method="post">
+      <form action="" method="post" class="text-black-50" onsubmit="onSubmit(event)">
         <div class="row">
           <div class="col">
             <div class="mb-3">
@@ -137,9 +138,9 @@
             <button type="submit" class="btn btn-primary">
               Send email to Us
             </button>
-
           </div>
         </div>
+        <div id="responseMessage" class="text-danger text-center"></div>
       </form>
     </div>
   </section>
@@ -211,6 +212,31 @@
 
   <script src="./js/map.js"></script>
 
+  <script>
+    function onClick(e) {
+      e.preventDefault();
+      grecaptcha.ready(function () {
+        grecaptcha.execute('6LcB6vYrAAAAAC5A-sfDA-drdaS4tNZHbBQO6u5c', { action: 'submit' }).then(async function (token) {
+          let response = await fetch('verify.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({ 'g-token': token })
+          });
+          if (response.status == 200) {
+            sendMail();
+          } else {
+            document.getElementById('responseMessage').innerHTML = 'Error: Can not verify RECAPTCHA';
+          }
+        });
+      });
+    }
+    function sendMail() {
+      document.getElementById('responseMessage').innerHTML = 'OK';
+    }
+  </script>
 
 </body>
 
