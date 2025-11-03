@@ -23,7 +23,7 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
   <!-- Web1 css file -->
   <link rel="stylesheet" href="./css/23880223.css" />
-  <script src="https://www.google.com/recaptcha/api.js?render=6LcW9PYrAAAAAAaOv2H-ZAX6b0Q3oPdVtvwy9QLg"></script>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LdZ4QAsAAAAACIo-dS0v0YgnatkGFLoKFWGDi7s"></script>
 </head>
 
 <body>
@@ -216,16 +216,16 @@
     function onSubmit(e) {
       e.preventDefault();
       grecaptcha.ready(function () {
-        grecaptcha.execute('6LcW9PYrAAAAAAaOv2H-ZAX6b0Q3oPdVtvwy9QLg', { action: 'submit' }).then(async function (token) {
+        grecaptcha.execute('6LdZ4QAsAAAAACIo-dS0v0YgnatkGFLoKFWGDi7s', { action: 'submit' }).then(async function (token) {
           let response = await fetch('verify.php', {
-            method: 'POST',
+            method: 'OPTIONS',
             headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json'
             },
             body: JSON.stringify({ 'g-token': token })
           });
-          if (response.status == 200) {
+          if (response.status) {
             sendMail();
           } else {
             document.getElementById('responseMessage').innerHTML = 'Error: Can not verify RECAPTCHA';
