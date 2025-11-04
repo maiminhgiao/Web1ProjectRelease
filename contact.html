@@ -24,6 +24,8 @@
   <!-- Web1 css file -->
   <link rel="stylesheet" href="./css/23880223.css" />
   <script src="https://www.google.com/recaptcha/api.js?render=6LdZ4QAsAAAAACIo-dS0v0YgnatkGFLoKFWGDi7s"></script>
+  <script src="./js/23880223.js"></script>
+
 </head>
 
 <body>
@@ -131,16 +133,23 @@
           <label for="" class="form-label">Message *</label>
           <textarea class="form-control" name="" id="" rows="3"></textarea>
         </div>
-        <div class="text-end">
-          <div class="form-check">
-            <label class="form-check-label" for="copy"> Send a copy to yourself &nbsp;</label>
-            <input type="checkbox" value="1" id="copy" />&nbsp;&nbsp;
-            <button type="submit" class="btn btn-primary">
-              Send email to Us
-            </button>
+        <div class="row">
+          <div class="col">
+            <div id="responseMessage" class="text-info "></div>
+          </div>
+          <div class="col">
+            <div class="text-end">
+              <div class="form-check">
+                <label class="form-check-label" for="copy"> Send a copy to yourself &nbsp;</label>
+                <input type="checkbox" value="1" id="copy" />&nbsp;&nbsp;
+                <button type="submit" class="btn btn-primary">
+                  Send email to Us
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        <div id="responseMessage" class="text-danger text-center"></div>
+
       </form>
     </div>
   </section>
@@ -228,14 +237,55 @@
           if (response.status) {
             sendMail();
           } else {
+            let responseMessage = document.getElementById('responseMessage');
             document.getElementById('responseMessage').innerHTML = 'Error: Can not verify RECAPTCHA';
+            responseMessage.claassList.remove();
+            responseMessage.classList.toggle('text-danger');
           }
         });
       });
     }
-    function sendMail() {
-      document.getElementById('responseMessage').innerHTML = 'OK';
+
+    async function sendMail() {
+      let responseMessage = document.getElementById('responseMessage');
+      try {
+        let token = await getAuthenticateToken('test', '1c3cr3@m');
+
+        let postData = {
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          subject: document.getElementById('message').value,
+          message: document.getElementById('message').value,
+          copy: document.getElementById('copy').checked
+        };
+
+        let response = await fetch(`${AUTHENTICATE_API}/send`, {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application / json",
+            "Authorization": `Bearer ` + token
+          },
+          body: JSON.stringify(postData)
+        });
+
+        let result = await response.json();
+        if (response.status == 200) {
+          responseMessage.innerHTML = result.message;
+          responseMessage.classList.remove();
+          responseMessage.classList.toggle('text-success');
+        } else {
+          throw new Error(result.message);
+        }
+
+      } catch (error) {
+        console.error(error);
+        responseMessage.innerHTML = error;
+        responseMessage.classList.remove();
+        responseMessage.classList.add('text-danger');
+      }
     }
+
   </script>
 
 </body>
