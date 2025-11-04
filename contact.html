@@ -131,7 +131,7 @@
         </div>
         <div class="mb-3">
           <label for="" class="form-label">Message *</label>
-          <textarea class="form-control" name="" id="" rows="3"></textarea>
+          <textarea class="form-control" name="" id="message" rows="3"></textarea>
         </div>
         <div class="row">
           <div class="col">
@@ -239,8 +239,8 @@
           } else {
             let responseMessage = document.getElementById('responseMessage');
             document.getElementById('responseMessage').innerHTML = 'Error: Can not verify RECAPTCHA';
-            responseMessage.claassList.remove();
-            responseMessage.classList.toggle('text-danger');
+            responseMessage.classList.remove();
+            responseMessage.className = 'text-success';
           }
         });
       });
@@ -254,17 +254,19 @@
         let postData = {
           name: document.getElementById('name').value,
           email: document.getElementById('email').value,
-          subject: document.getElementById('message').value,
+          subject: document.getElementById('subject').value,
           message: document.getElementById('message').value,
-          copy: document.getElementById('copy').checked
-        };
+          copy: document.getElementById('copy').checked ? 1 : 0
 
+        };
+        console.log(postData);
+        console.log(token.token);
         let response = await fetch(`${AUTHENTICATE_API}/send`, {
           method: 'POST',
           headers: {
             "Content-Type": "application/json",
-            "Accept": "application / json",
-            "Authorization": `Bearer ` + token
+            "Accept": "application/json",
+            "Authorization": `Bearer ` + token.token
           },
           body: JSON.stringify(postData)
         });
@@ -273,7 +275,7 @@
         if (response.status == 200) {
           responseMessage.innerHTML = result.message;
           responseMessage.classList.remove();
-          responseMessage.classList.toggle('text-success');
+          responseMessage.className = 'text-primary';
         } else {
           throw new Error(result.message);
         }
