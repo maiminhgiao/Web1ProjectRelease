@@ -259,8 +259,6 @@
           copy: document.getElementById('copy').checked ? 1 : 0
 
         };
-        console.log(postData);
-        console.log(token.token);
         let response = await fetch(`${AUTHENTICATE_API}/send`, {
           method: 'POST',
           headers: {
@@ -281,7 +279,6 @@
         }
 
       } catch (error) {
-        console.error(error);
         responseMessage.innerHTML = error;
         responseMessage.classList.remove();
         responseMessage.classList.add('text-danger');
