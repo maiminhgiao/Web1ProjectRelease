@@ -210,3 +210,8 @@ footer {
   background-color: var(--blue) !important;
   border: none;
 }
+
+.custom-modal {
+  max-width: 600px;
+  width: 90%;
+}

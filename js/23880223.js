@@ -25,10 +25,99 @@ async function getAuthenticateToken(username, password) {
       password: password,
     }),
   });
-  let result = response.json();
+
+  const result = await response.json();
+
   if (response.status === 200) {
     return result;
   } else {
-    throw new Error((await result).message);
+    throw new Error(result.message || "Authentication failed");
+  }
+}
+
+async function login(e) {
+  e.preventDefault();
+
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  try {
+    const token = await getAuthenticateToken(username, password);
+    console.log(token); // check token
+
+    if (token && token.token) {
+      // lưu token
+      localStorage.setItem("authToken", token.token);
+
+      // đóng modal bằng Bootstrap API
+      const modalEl = document.getElementById("modalLogin");
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      document.activeElement.blur();
+      if (modal) modal.hide();
+
+      // cập nhật hiển thị login/logout
+      displayControls(true);
+    }
+  } catch (error) {
+    document.getElementById("errorMessage").innerHTML =
+      error.message || "Login failed";
+    displayControls(false);
+  }
+}
+
+function displayControls(isLoggedIn = false) {
+  const linkLogins = document.getElementsByClassName("linkLogin");
+  const linkLogouts = document.getElementsByClassName("linkLogout");
+
+  const displayLogin = isLoggedIn ? "none" : "block";
+  const displayLogout = isLoggedIn ? "block" : "none";
+
+  for (let i = 0; i < linkLogins.length; i++) {
+    linkLogins[i].style.display = displayLogin;
+  }
+  for (let i = 0; i < linkLogouts.length; i++) {
+    linkLogouts[i].style.display = displayLogout;
+  }
+}
+
+async function checkLogin() {
+  let isLogin = await verifyToken();
+  displayControls(isLogin);
+}
+
+async function verifyToken() {
+  let token = localStorage.getItem("authToken");
+  if (token) {
+    let response = await fetch(`${AUTHENTICATE_API}/verify`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+    if (response.status === 200) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function logout() {
+  localStorage.clear();
+  displayControls(false);
+}
+
+function updateLoginStatus() {
+  const token = localStorage.getItem("token");
+  const linkLogin = document.querySelectorAll(".linkLogin");
+  const linkLogout = document.querySelectorAll(".linkLogout");
+
+  if (token) {
+    linkLogin.forEach((el) => (el.style.display = "none"));
+    linkLogout.forEach((el) => (el.style.display = "block"));
+  } else {
+    linkLogin.forEach((el) => (el.style.display = "block"));
+    linkLogout.forEach((el) => (el.style.display = "none"));
   }
 }
