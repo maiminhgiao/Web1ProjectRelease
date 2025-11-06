@@ -23,7 +23,7 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
   <!-- Web1 css file -->
   <link rel="stylesheet" href="./css/23880223.css" />
-  <script src="./js/23880223.js"></script>
+  <!-- <script src="./js/23880223.js"></script> -->
 
 </head>
 
@@ -110,19 +110,17 @@
       Copyright &copy 2025 by Mai Minh Giao - 2388023
     </p>
   </footer>
-  <!-- Modal trigger button -->
 
   <!-- Modal Body -->
-  <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
   <div class="modal fade" id="modalLogin" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
     aria-labelledby="modalTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered custom-modal" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="#" method="post" id="formLogin">
+          <form action="#" method="post" id="formLogin" onsubmit="login(event)">
             <h3 class="text-center">Login Form</h3>
             <div class="mb-3">
               <input type="text" name="username" id="username" class="form-control" placeholder="Username" />
@@ -137,14 +135,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Optional: Place to the bottom of scripts
-    <script>
-      const myModal = new bootstrap.Modal(
-        document.getElementById("modalId"),
-        options
-      );
-    </script> -->
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -264,6 +254,7 @@
   <script>
     window.onload = function () {
       updateLoginStatus();
+      checkLogin();
       loadData("aboutus", "#about-us-template", "about-us");
       loadData("visions", "#visions-template", "visions");
       loadData("team", "#our-team-template", "our-team");

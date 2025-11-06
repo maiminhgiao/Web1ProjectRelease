@@ -43,7 +43,6 @@ async function login(e) {
 
   try {
     const token = await getAuthenticateToken(username, password);
-    console.log(token); // check token
 
     if (token && token.token) {
       // lưu token
