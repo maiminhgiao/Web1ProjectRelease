@@ -215,28 +215,13 @@
             <p class="text-black-50">{{summary}}</p>
             <a
               class="readmore btn btn-link pt-0"
-              href="#"
-              onclick="loadData('products/{{id}}', '#details-template', 'content')"
+              href="?request=products/{{id}}"
             >Read more</a>
           </div>
         {{/each}}
       </div>
     </script>
 
-  <!-- <script>
-      xử lý handlebars
-      (async function () {
-        const respone = await fetch("https://web1-api.vercel.app/api/products");
-        const data = await respone.json();
-
-        var source = document.querySelector("#products-template").innerHTML;
-        var template = Handlebars.compile(source);
-        var context = { data: data };
-
-        var view = document.getElementById("products");
-        view.innerHTML = template(context);
-      })();
-    </script> -->
   <script id="news-template" type="text/x-handlebars-template">
       <h1 class="text-black-50">News</h1>
       <div class="row py-3">
@@ -246,7 +231,7 @@
               <div class="date text-white text-center rounded-4 py-1">
                 <h3>{{date}}</h3>
               </div>
-              <a href="" class="btn btn-link readmore ps-0">Read more</a>
+              <a href="?request=news/{{id}}" class="btn btn-link readmore ps-0">Read more</a>
             </div>
             <div>
               <h4>{{name}}</h4>
@@ -271,9 +256,21 @@
     </script>
 
   <script>
-    checkLogin();
-    loadData("products", "#products-template", "products");
-    loadData("news", "#news-template", "news");
+    if (location.search) {
+      updateLoginStatus();
+      let searchParams = new URLSearchParams(location.search);
+      let request = searchParams.get("request");
+      if (request) {
+        loadData(request, "#details-template", "content");
+      }
+    }
+    else {
+      document.addEventListener("DOMContentLoaded", () => {
+        initLoginState();
+      });
+      loadData("products", "#products-template", "products");
+      loadData("news", "#news-template", "news");
+    }
 
     function setActiveImagepath(element, imagepath, isActive = true) {
       if (isActive) {

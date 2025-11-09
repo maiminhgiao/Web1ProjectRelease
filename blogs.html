@@ -261,7 +261,9 @@
           {{/each}}
         </script>
   <script>
-    checkLogin();
+    document.addEventListener("DOMContentLoaded", () => {
+      initLoginState();
+    });
     Handlebars.registerHelper("formatDate", function (date) {
       if (!date) return "";
       const d = new Date(date);

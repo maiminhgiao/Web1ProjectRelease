@@ -47,6 +47,7 @@ async function login(e) {
     if (token && token.token) {
       // lưu token
       localStorage.setItem("authToken", token.token);
+      localStorage.setItem("isLogin", "true");
 
       // đóng modal bằng Bootstrap API
       const modalEl = document.getElementById("modalLogin");
@@ -108,7 +109,8 @@ async function verifyToken() {
 }
 
 function logout() {
-  localStorage.clear();
+  localStorage.removeItem("authToken");
+  localStorage.removeItem("isLogin");
   displayControls(false);
 }
 
@@ -124,4 +126,12 @@ function updateLoginStatus() {
     linkLogin.forEach((el) => (el.style.display = "block"));
     linkLogout.forEach((el) => (el.style.display = "none"));
   }
+}
+
+async function initLoginState() {
+  const isLogin = localStorage.getItem("isLogin") === "true";
+  displayControls(isLogin);
+
+  const valid = await verifyToken();
+  if (!valid) logout();
 }

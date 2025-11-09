@@ -253,15 +253,22 @@
     </script>
 
   <script>
-    window.onload = function () {
-      updateLoginStatus();
-      checkLogin();
+    document.addEventListener("DOMContentLoaded", async () => {
+      const isLogin = localStorage.getItem("isLogin") === "true";
+      displayControls(isLogin);
+
+      const valid = await verifyToken();
+      if (!valid) {
+        logout();
+      }
+
       loadData("aboutus", "#about-us-template", "about-us");
       loadData("visions", "#visions-template", "visions");
       loadData("team", "#our-team-template", "our-team");
       loadData("testimonials", "#testimonials-template", "testimonials");
-    };
+    });
   </script>
+
 </body>
 
 </html>

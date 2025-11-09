@@ -224,7 +224,9 @@
 
   <script>
     updateLoginStatus();
-    checkLogin();
+    document.addEventListener("DOMContentLoaded", () => {
+      initLoginState();
+    });
     function onSubmit(e) {
       e.preventDefault();
       grecaptcha.ready(function () {
