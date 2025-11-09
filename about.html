@@ -71,7 +71,8 @@
     </nav>
   </header>
   <section id="banner-small"></section>
-  <div id="content">
+  <div id="content"></div>
+  <div id="main">
     <section class="container py-5">
       <div class="row">
         <div class="col-md-8 col-sm-12" id="about-us"></div>
@@ -161,15 +162,14 @@
             class="float-start rounded-4 me-3"
           />
           <div class="text-long">
-            <!-- <h3>{{name}}</h3> -->
             <div class="text-black-50">
               {{{summary}}}
             </div>
           </div>
           <a
-            href="#"
+            href="#aboutus/{{id}}"
             class="btn btn-link readmore ps-0 ms-0 morepadding"
-            onclick="loadData('aboutus/{{id}}', '#details-template','content')"
+            onclick="loadDetails('aboutus/{{id}}', '#details-template','content')"
           >Read more</a>
         </div>
       {{/each}}
@@ -181,8 +181,8 @@
         <div class="clearfix mb-3">
           <a
             class="text-decoration-none text-black-50"
-            href="#"
-            onclick="loadData('visions/{{id}}', '#details-template', 'content')"
+            href="#visions/{{id}}"
+            onclick="loadDetails('visions/{{id}}', '#details-template', 'content')"
           >
             <img
               src="{{thumbpath}}"
@@ -220,7 +220,7 @@
       <div class="row py-3">
         {{#each data}}
         <div class="col">
-          <a href="#" class="text-decoration-none " onclick="loadData('team/{{id}}', '#details-template', 'content')">
+          <a href="#team/{{id}}" class="text-decoration-none " onclick="loadDetails('team/{{id}}', '#details-template', 'content')">
           <img
             src="{{thumbpath}}"
             alt="{{name}}"
@@ -261,14 +261,40 @@
       if (!valid) {
         logout();
       }
-
-      loadData("aboutus", "#about-us-template", "about-us");
-      loadData("visions", "#visions-template", "visions");
-      loadData("team", "#our-team-template", "our-team");
-      loadData("testimonials", "#testimonials-template", "testimonials");
+      if (location.hash == '' || location.hash == '#') {
+        loadPage();
+      } else {
+        loadDetails(location.hash.substr(1), '#details-template', 'content');
+      }
     });
-  </script>
 
+    async function loadPage() {
+      document.getElementById('main').style.display = 'block';
+      document.getElementById('content').style.display = 'none';
+      await loadData("aboutus", "#about-us-template", "about-us");
+      await loadData("visions", "#visions-template", "visions");
+      await loadData("team", "#our-team-template", "our-team");
+      await loadData("testimonials", "#testimonials-template", "testimonials");
+      history.replaceState({ loadPage: 1 }, null, window.location.href);
+    }
+
+    async function loadDetails(request, templateId, viewId) {
+      document.getElementById('main').style.display = 'none';
+      document.getElementById('content').style.display = 'block';
+      await loadData(request, templateId, viewId);
+      history.replaceState({ request, templateId, viewId }, null, window.location.href);
+    }
+
+    window.onpopstate = (event) => {
+      const state = event.state;
+      if (state && state.loadPage) {
+        loadPage();
+      } else if (state && state.request) {
+        loadDetails(state.request, state.templateId, state.viewId);
+      }
+    };
+
+  </script>
 </body>
 
 </html>
