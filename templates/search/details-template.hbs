@@ -1,9 +1,9 @@
-<section id="banner-small"></section>
+{{!-- <section id="banner-small"></section> --}}
 {{#each data}}
 <div class="container py-4">
-    <h1 class="fw-bold">{{name}}</h1>
-    <div class="text-black-50">{{{description}}}</div>
-    {{!-- <div class="row align-items-center">
+    {{!-- <h1 class="fw-bold">{{name}}</h1>
+    <div class="text-black-50">{{{description}}}</div> --}}
+    <div class="row align-items-center">
         <div class="col-md-6 text-center">
             {{#if imagepath}}
             <img src="{{imagepath}}" alt="{{name}}" class="img-fluid rounded shadow"
@@ -15,6 +15,6 @@
             <h1 class="fw-bold">{{name}}</h1>
             <div class="text-black-50 fs-5">{{{description}}}</div>
         </div>
-    </div> --}}
+    </div>
 </div>
 {{/each}}
