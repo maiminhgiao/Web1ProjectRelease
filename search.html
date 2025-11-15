@@ -23,6 +23,12 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <!-- Web1 css file -->
     <link rel="stylesheet" href="./css/23880223.css" />
+    <!-- handlebars -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"
+        integrity="sha512-E1dSFxg+wsfJ4HKjutk/WaCzK7S2wv1POn1RRPGh8ZK+ag9l244Vqxji3r6wgz9YBf6+vhQEYJZpSjqWFPg9gg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./js/23880223.js"></script>
+    <script src="js/search/search-template.js"></script>
 </head>
 
 <body>
@@ -134,44 +140,6 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
 
-    <!-- handlebars -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"
-        integrity="sha512-E1dSFxg+wsfJ4HKjutk/WaCzK7S2wv1POn1RRPGh8ZK+ag9l244Vqxji3r6wgz9YBf6+vhQEYJZpSjqWFPg9gg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="./js/23880223.js"></script>
-
-    <script id="search-template" type="text/x-handlebars-template">
-      {{#each data}}
-        <div class="py-3">
-          <a
-            class="text-decoration-none"
-            href="#"
-            onclick="loadData('{{type}}/{{id}}', '#details-template',
-    'content' )"
-          ><h1 class="text-black">{{name}}</h1></a>
-          <div class="text-black-50">{{summary}}</div>
-        </div>
-      {{/each}}
-    </script>
-
-    <script id="details-template" type="text/x-handlebars-template">
-  {{#each data}}
-  <div class="container py-4">
-    <div class="row align-items-center">
-      <div class="col-md-6 text-center">
-        {{#if imagepath}}
-          <img src="{{imagepath}}" alt="{{name}}" class="img-fluid rounded shadow" style="max-height:500px; object-fit:cover;">
-        {{/if}}
-      </div>
-
-      <div class="col-md-6">
-        <h1 class="fw-bold">{{name}}</h1>
-        <div class="text-black-50 fs-5">{{{description}}}</div>
-      </div>
-    </div>
-  </div>
-  {{/each}}
-</script>
 
     <script>
         updateLoginStatus();

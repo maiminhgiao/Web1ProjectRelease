@@ -23,6 +23,15 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
   <!-- Web1 css file -->
   <link rel="stylesheet" href="./css/23880223.css" />
+  <!-- handlebars -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"
+    integrity="sha512-E1dSFxg+wsfJ4HKjutk/WaCzK7S2wv1POn1RRPGh8ZK+ag9l244Vqxji3r6wgz9YBf6+vhQEYJZpSjqWFPg9gg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/gallery/details-template.js"></script>
+  <script src="js/gallery/gallery-categories-template.js"></script>
+  <script src="js/gallery/gallery-template.js"></script>
+  <script src="./js/23880223.js"></script>
+
 </head>
 
 <body>
@@ -136,42 +145,11 @@
     integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
     crossorigin="anonymous"></script>
 
-  <!-- handlebars -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"
-    integrity="sha512-E1dSFxg+wsfJ4HKjutk/WaCzK7S2wv1POn1RRPGh8ZK+ag9l244Vqxji3r6wgz9YBf6+vhQEYJZpSjqWFPg9gg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="./js/23880223.js"></script>
 
-  <script id="gallery-categories-template" type="text/x-handlebars-template">
-      <li class="nav-item">
-        <a
-          class="nav-link disabled ps-0"
-          href="#"
-          aria-current="page"
-          onclick="loadData('gallery','#gallery-template','gallery'); disabledLink(this);"
-        >Show All</a>
-      </li>
-      {{#each data}}
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            href="#"
-            onclick='loadData("gallery/categories/{{id}}", "#gallery-template", "gallery"); disabledLink(this);'
-          >{{name}}</a>
-        </li>
-      {{/each}}
-    </script>
-
-  <script id="gallery-template" type="text/x-handlebars-template">
-      {{#each data}}
-        <div class="col-md-3">
-          <img class="img-thumbnail mb-3" src="{{thumbpath}}" alt="{{name}}" />
-        </div>
-      {{/each}}
-    </script>
 
   <script>
     updateLoginStatus();
+    checkLogin();
     document.addEventListener("DOMContentLoaded", () => {
       initLoginState();
     });
